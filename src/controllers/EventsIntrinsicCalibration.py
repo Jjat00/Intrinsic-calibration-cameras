@@ -1,12 +1,12 @@
-from PySide2 import *
+from PySide2 import QtGui, QtWidgets
 import json
 import numpy as np
 import cv2
-from IntrinsicCameraCalibration import *
+from IntrinsicCameraCalibration import IntrinsicCameraCalibration
 
-class Actions():
+class EventsIntrinsicCalibration():
     def __init__(self, window):
-        super(Actions).__init__()
+        super(EventsIntrinsicCalibration).__init__()
         self.window = window
         self.scalaImage = 70
         self.intrinsicCalibrationData = {}
@@ -39,8 +39,8 @@ class Actions():
     def getPatternImage(self):
         patternImages = self.intrinsicCalibration.getDrawChessBoardImages()
         self.showImage(patternImages[0])
-        self.intrinsicCalibration.undistortImage1(patternImages[0])
-        self.intrinsicCalibration.undistortImage2(patternImages[0])
+        #self.intrinsicCalibration.undistortImage1(patternImages[0])
+        #self.intrinsicCalibration.undistortImage2(patternImages[0])
         return patternImages
 
     def showIntrinsicParamters(self):

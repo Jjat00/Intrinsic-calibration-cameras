@@ -1,9 +1,10 @@
-# **Intrinsic Calibration Cameras**
+# **Intrinsic Camera Calibration**
+
+# Description 
 
 This is a simple desktop application to carry out the process of performing the intrinsic calibration of any camera as long as you have the appropriate calibration pattern for each camera. In this case there are the intrinsic parameters of three cameras: rgb, depth and thermal. Once the parameters are found, you can correct the distortion that your images present. The parameters are saved in a .json format file
-## Intrinsic Calibration Results
-![depth pattern](public/images/intrinsicCalibration.png)
 
+## Intrinsic Calibration Results
 ```
 {
     "focalParameters": {
@@ -23,14 +24,17 @@ This is a simple desktop application to carry out the process of performing the 
 ```
 
 ## Dependencies
-This project needs **[libfreenect](https://github.com/OpenKinect/libfreenect)** on your computer to enter the microsoft kinect camera. If you are using a different camera you need to modify the file **src/ models/DataAcquisition.py** and ready, you can use the application.
+
+* Python +3.7
 
 ## Project Setup
+
 ```
     pip install -r requirements.txt
 ```
 ## Run Project
+
 ```
-    python src/IntrinsicCalibrationWidget.py
+    python src/IntrinsicCalibrationApp.py
 ```
 

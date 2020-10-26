@@ -1,14 +1,14 @@
 from PySide2 import *
 import glob
-from IntrinsicAcquisitionWidget import *
-from Actions import *
+from IntrinsicAcquisitionWidget import IntrinsicAcquisitionWidget
+from EventsIntrinsicCalibration import EventsIntrinsicCalibration
 
 
-class ControllerIntrinsicCalibration():
+class HandlerIntrinsicCalibration():
     def __init__(self, window):
-        super(ControllerIntrinsicCalibration).__init__()
+        super(HandlerIntrinsicCalibration).__init__()
         self.window = window
-        self.action = Actions(self.window)
+        self.event = EventsIntrinsicCalibration(self.window)
         self.whichImage = 0
         self.loadPatter = False
         self.save = False
@@ -18,28 +18,29 @@ class ControllerIntrinsicCalibration():
         intrinsicWidget.exec()
 
     def handlerLoadPatternImages(self):
-        pathImages = self.action.selectDirectoryImages()
-        self.patternImages = glob.glob(pathImages+"/*.png")
-        self.totalImagesCalibration = len(self.patternImages)
-        self.action.showImage(self.patternImages[0])
-        self.loadPatter = True
-        self.showCurrentImage()
+        pathImages = self.event.selectDirectoryImages()
+        if pathImages != '':
+            self.patternImages = glob.glob(pathImages+"/*.png")
+            self.totalImagesCalibration = len(self.patternImages)
+            self.event.showImage(self.patternImages[0])
+            self.loadPatter = True
+            self.showCurrentImage()
 
     def handlerStartCalibration(self):
         if self.loadPatter:
-            self.action.startIntrinsicCalibration(self.patternImages)
-            self.patternImages = self.action.getPatternImage()
+            self.event.startIntrinsicCalibration(self.patternImages)
+            self.patternImages = self.event.getPatternImage()
             self.save = True
             self.whichImage = 0
             self.showCurrentImage()
 
     def handlerSaveParameters(self):
         if self.save:
-            self.action.saveDialog()
+            self.event.saveDialog()
 
     def handlerClearWorkspace(self):
-        self.action.clearWorkspace()
-        self.action.resetParameters()
+        self.event.clearWorkspace()
+        self.event.resetParameters()
         self.loadPatter = False
         self.save = False
         self.patternImages = []
@@ -50,18 +51,18 @@ class ControllerIntrinsicCalibration():
     def handlerPreviousParameters(self):
         if self.loadPatter:
             if (self.whichImage > 0):
-                self.action.clearWorkspace()
+                self.event.clearWorkspace()
                 self.whichImage = self.whichImage - 1
-                self.action.showImage(
+                self.event.showImage(
                     self.patternImages[self.whichImage])
                 self.showCurrentImage()
 
     def handlerNextParameters(self):
         if self.loadPatter:
             if (self.whichImage < self.totalImagesCalibration-1):
-                self.action.clearWorkspace()
+                self.event.clearWorkspace()
                 self.whichImage = self.whichImage + 1
-                self.action.showImage(
+                self.event.showImage(
                     self.patternImages[self.whichImage])
                 self.showCurrentImage()
 

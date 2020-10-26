@@ -1,11 +1,11 @@
-from PySide2 import *
+from PySide2 import QtGui, QtCore
 relativePathIcons = '../public/icons/'
 
 class StylesIntrinsicCalibration():
     def __init__(self, widget):
         super(StylesIntrinsicCalibration).__init__()
         self.widgetAcq = widget
-        self.theme2()
+        self.theme1()
         self.setIcons()
         self.formStyle()
 
@@ -16,7 +16,7 @@ class StylesIntrinsicCalibration():
         self.frameCamera = '#212121'
         self.primaryText = '#f5f5f5'
         self.secondaryText = '#757575'
-        self.progressBar = '#ee98fb'
+        self.progressBar = '#ff795e'
         self.lineEdit = '#263238'
 
     def theme2(self):
@@ -97,8 +97,7 @@ class StylesIntrinsicCalibration():
                     Background: """+self.buttons + """;
                     color: """+self.secondaryColor + """;
                     min-height: 40px;
-                    min-width: 40px;
-                    border-radius: 20px;
+                    min-width: 80px;
                 }       
                 QPushButton:pressed {
                     background-color: rgb(224, 0, 0);
